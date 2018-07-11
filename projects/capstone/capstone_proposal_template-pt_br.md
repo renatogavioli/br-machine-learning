@@ -1,25 +1,33 @@
 # Nanodegree Engenheiro de Machine Learning
 ## Proposta de projeto final
-Joe Udacity  
-31 de dezembro de 2050
+Renato Rosafa Gavioli
+03 de julho de 2018
 
-## Proposta
-_(aprox. 2-3 páginas)_
+## Reconhecimento de Atividade Humana Usando Dados de Smartphone
 
 ### Histórico do assunto
-_(aprox. 1-2 parágrafos)_
 
-Nesta seção, dê informações básicas sobre o assunto no qual o projeto está inserido. Informações históricas relevantes ao projeto devem ser incluídas. Deve estar claro como e por qual motivo um problema deste assunto pode ou deve ser resolvido. Pesquisas acadêmicas relacionadas devem ser citadas de forma adequada nesta seção, incluindo o porquê da pesquisa ser relevante. Encorajamos que seja mencionada qual foi a motivação pessoal do aluno para que ele realizasse a investigação de determinado problema nesse domínio, porém, isso não é obrigatório.
+Com o advento dos smartphones e seu custo cada vez menor, é cada vez mais comum as pessoas possuírem dispositivos em seus bolsos dotados de diversos sensores inerciais como acelerômetros e giroscópios. Com isso, tornam-se disponíveis dados sobre os padrões de deslocamento dos usuários que permitem uma série de insights. Associados a tecnologias como GPS e smartwatches...
+
+A evolução da pirâmide etária brasileira vem apontando para um gradual envelhecimento da população. Este envelhecimento, caracterizado por um aumento na quntidade de idosos na população, é decorrente do crescente grau de urbanização do desenvolvimento econômico e humano do país [https://www.ibge.gov.br/apps/populacao/projecao/, acesso em 09.07.2018]. 
+
+Idosos são frequentemente vítimas de quedas. Além dos problemas médicos, as quedas apresentam custo social, econômico e psicológico enormes, aumentando a dependência e a institucionalização. Estima-se que há uma queda para um em cada três indivíduos com mais de 65 anos e, que um em vinte daqueles que sofreram uma queda sofram uma fratura ou necessitem de internação. Dentre os mais idosos, com 80 anos e mais, 40% caem a cada ano. Dos que moram em asilos e casas de repouso, a freqüência de quedas é de 50%. A prevenção de quedas é tarefa difícil devido a variedade de fatores que as predispõem.[http://bvsms.saude.gov.br/bvs/dicas/184queda_idosos.html, acesso em 09.07.2018] 
+
+Com o advento e a democratização de _smartphones_ dotados de inúmeros sensores [https://www.uni-weimar.de/kunst-und-gestaltung/wiki/images/Zeitmaschinen-smartphonesensors.pdf, acesso em 09.07.2018], surgiram diversas aplicações de sensoreament que fazem uso destes sensores e das capacidades de processamento e transmissão dos _smartphones_, para aquisição e processamento de dados, exibição e comunicação. 
+
+O monitoramento e análise dos dados proveniente de sensores inerciais como acelerômetros e giroscópios podem permitir prever qual o padrão de atividade e movimentação do usuário, utilizando um algoritmo de classificação supervisionada. Com isso, torna-se possível a criação de aplicações para identificar uma queda em um idoso, permitindo ações de socorro mais rápidas, além de um cenário mais claro da distribuição de quedas, suas causas e contextos como subsídio para ações preventivas. Este tipo de estratégia já vem sendo aplicada para identificação de crises epilépticas [https://www.researchgate.net/profile/Khaled_Elleithy/publication/322921138_Smart_Phone_Application_Development_for_Monitoring_Epilepsy_Seizure_Detection_based_on_EEG_signal_Classification/links/5a76327145851541ce588920/Smart-Phone-Application-Development-for-Monitoring-Epilepsy-Seizure-Detection-based-on-EEG-signal-Classification.pdf?origin=publication_list, acesso em 09.07.2018]. 
 
 ### Descrição do problema
-_(aprox. 1 parágrafo)_
 
-Nesta seção, descreva claramente o problema a ser resolvido. O problema descrito deve ser bem definido e ter pelo menos uma solução possível. Descreva o problema detalhadamente, de forma que fique claro que o problema é quantificável (pode ser expresso em termos matemáticos ou lógicos), mensurável (pode ser medido por uma métrica e claramente observado), e replicável (pode ser reproduzido e ocorre mais de uma vez).
+O problema a ser resolvido é um problema de classificação supervisionada. Dado uma observação ou um conjunto de observações provenientes de acelerômetros e sensores de um smartphone, necessitamos saber qual a atividade praticada pelo usuário daquele smartphone com algum grau de certeza. Podemos medir o quão bem resolvemos este problema a partir das taxas de acertos - numa situação de classificação binária (queda vs. não-queda), o número de falsos negativos não deveria ser um problema, e a métrica principal de revocação (recall), e não de precisão, torna-se mais apropriada. O problema é replicável, uma vez que o conjunto de dados encontra-se publicamente disponível.
 
 ### Conjuntos de dados e entradas
-_(aprox. 2-3 parágrafos)_
 
-Nesta seção, o(s) conjunto(s) de dados e/ou entrada(s) considerado(s) para o projeto deve(m) ser descrito(s) detalhadamente, bem como a forma como ele(s) está(ão) relacionado(s) ao problema e por que deverá(ão) ser utilizado(s). Informações tais como a forma de obtenção do conjunto de dados ou entrada e as características do conjunto de dados ou entrada devem ser incluídas com referências relevantes e citações, conforme o necessário. Deve estar claro como o(s) conjunto(s) de dados ou entrada(s) será(ão) utilizado(s) no projeto e se o uso dele(s) é apropriado, dado o contexto do problema.
+Serão utilizados os dados _Human Activity Recognition Using Smartphones Data Set_, disponíveis em [https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones]. Este conjunto foi produzido por um experimento no qual diversos voluntários praticaram diversas atividades com um aparelho preso à cintura - as informações geradas pelos acelerômetros foram preprocessadas e disponibilizadas. O conjunto de dados compreende cerca de 10000 observações de 561 caraterísticas (features), relacionadas a 7 atividades diferentes (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING). Será tomada como atividade alvo a de deitar (LAYING), que pode corresponder a uma queda, e as demais serão agregadas, representado uma situação na qual não haja queda.
+
+As características compreendem dados de acelerômetro e giroscópio em 3 direções. Os dados foram preprocessados de modo que, dentre as características, estao máximos, mínimos, médias e dados convertidos em termos de aceleração, aceleração gravitacional, energia - acredito que uma boa parte destes features podem estar de certo modo relacionados, podendo ser reduzidos.
+
+Uma limitação do trabalho é o fato de o conjunto de dados ter sido gerado por voluntários entre 19 e 48 anos, cujo padrão motor provavelmente é bastante diferente do de idosos. Entende-se que o conjunto pode ser suficiente para o desenvolvimento do método e das estratégias de tratamento de dados e aprendizagem, mas que um novo conjunto de dados deveria ser gerado com uma amostra da população de interesse, e este conjunto utilizado para uma aplicação em produção.
 
 ### Descrição da solução
 _(aprox. 1 parágrafo)_
