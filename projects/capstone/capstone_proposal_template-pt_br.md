@@ -4,7 +4,7 @@ Renato Rosafa Gavioli
 
 10 de julho de 2018
 
-## Reconhecimento de Quedas Usando Dados de Smartphone
+## Reconhecimento de Atividades Usando Dados de Smartphone
 
 
 ### Histórico do assunto
