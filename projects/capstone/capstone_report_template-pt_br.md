@@ -1,6 +1,6 @@
 # Nanodegree Engenheiro de Machine Learning
-## Projeto final
-Joe Udacity  
+## Projeto final - Reconhecimento de Atividades Usando Dados de Smartphone
+Renato Rosafa Gavioli 
 31 de dezembro de 2050
 
 ## I. Definição
@@ -11,17 +11,48 @@ Nesta seção, procure fornecer uma visão de alto nível do projeto em linguage
 - _Foi fornecido um resumo do projeto final, bem como o domínio do problema, a origem do projeto e o conjunto de dados ou entradas?_
 - _Foram dadas informações suficientes sobre o contexto para que um leitor desinformado possa entender o domínio e a enunciação problema?_
 
+A evolução da pirâmide etária brasileira vem apontando para um gradual envelhecimento da população. Este envelhecimento, caracterizado por um aumento na quntidade de idosos na população, é decorrente do crescente grau de urbanização do desenvolvimento econômico e humano do país [https://www.ibge.gov.br/apps/populacao/projecao/, acesso em 09.07.2018].
+
+Idosos são frequentemente vítimas de quedas. Além dos problemas médicos, as quedas apresentam custo social, econômico e psicológico enormes, aumentando a dependência e a institucionalização. Estima-se que há uma queda para um em cada três indivíduos com mais de 65 anos e, que um em vinte daqueles que sofreram uma queda sofram uma fratura ou necessitem de internação. Dentre os mais idosos, com 80 anos e mais, 40% caem a cada ano. Dos que moram em asilos e casas de repouso, a freqüência de quedas é de 50%. A prevenção de quedas é tarefa difícil devido a variedade de fatores que as predispõem.[http://bvsms.saude.gov.br/bvs/dicas/184queda_idosos.html, acesso em 09.07.2018]
+
+Com o advento e a democratização de _smartphones_ dotados de inúmeros sensores [https://www.uni-weimar.de/kunst-und-gestaltung/wiki/images/Zeitmaschinen-smartphonesensors.pdf, acesso em 09.07.2018], surgiram diversas aplicações de sensoreament que fazem uso destes sensores e das capacidades de processamento e transmissão dos _smartphones_, para aquisição e processamento de dados, exibição e comunicação.
+
+O monitoramento e análise dos dados proveniente de sensores inerciais como acelerômetros e giroscópios podem permitir prever qual o padrão de atividade e movimentação do usuário, utilizando um algoritmo de classificação supervisionada. Com isso, torna-se possível a criação de aplicações para identificar uma queda em um idoso, permitindo ações de socorro mais rápidas, além de um cenário mais claro da distribuição de quedas, suas causas e contextos como subsídio para ações preventivas. Este tipo de estratégia já vem sendo aplicada para identificação de crises epilépticas [https://www.researchgate.net/profile/Khaled_Elleithy/publication/322921138_Smart_Phone_Application_Development_for_Monitoring_Epilepsy_Seizure_Detection_based_on_EEG_signal_Classification/links/5a76327145851541ce588920/Smart-Phone-Application-Development-for-Monitoring-Epilepsy-Seizure-Detection-based-on-EEG-signal-Classification.pdf?origin=publication_list, acesso em 09.07.2018].
+
+Deste modo, o objetivo deste projeto foi treinar um algoritmo capaz de identificar de forma automática a queda de um indivíduo, a partir de dados obtidos de sensores inerciais presentes em um _smartphone_.
+
 ### Descrição do problema
 Nesta seção, você irá definir o problema que você está tentando resolver de forma clara, incluindo a estratégia (resumo das tarefas) que você irá utilizar para alcançar a solução desejada. Você deverá também discutir detalhadamente qual será a solução pretendida para este problema. Questões para se perguntar ao escrever esta seção:
 - _A enunciação do problema foi claramente definida? O leitor irá entender o que você está esperando resolver?_
 - _Você discutiu detalhadamente como irá tentar resolver o problema?_
 - _A solução antecipada está claramente definida? O leitor entenderá quais resultados você está procurando?_
 
+O problema a ser resolvido é um problema de classificação supervisionada. 
+
+Dada uma observação ou um conjunto de observações provenientes de acelerômetros e sensores de um smartphone, necessitamos saber qual a categoria de atividade/movimentação praticada pelo usuário daquele smartphone com algum grau de certeza.
+
+Para o projeo foram utilizados os dados _Human Activity Recognition Using Smartphones Data Set_ (disponíveis em [https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones] e em [https://www.kaggle.com/uciml/human-activity-recognition-with-smartphones].
+
+Este conjunto foi produzido por um experimento no qual diversos voluntários praticaram diversas atividades com um aparelho preso à cintura - as informações geradas pelos acelerômetros foram preprocessadas e disponibilizadas. O conjunto de dados compreende cerca de 10000 observações de 561 caraterísticas (features), relacionadas a 7 atividades diferentes (`WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING`). 
+
+Em face do objetivo principal de detecção de quedas, o problema pode ser simplificado quando tratado como um problema de classificaçao binária: foi tomada como atividade alvo a de deitar (`LAYING`), que pode corresponder a uma queda, e as demais foram agregadas, representado uma situação na qual não haja queda.
+
+As características compreendem dados de acelerômetro e giroscópio em 3 direções. Os dados são fornecidos já preprocessados de modo que, dentre as características, estao máximos, mínimos, médias e dados convertidos em termos de aceleração, aceleração gravitacional, energia - uma boa parte destes features são de certo modo relacionados, podendo ser reduzidos para simplificar ainda mais o problema.
+
+Após a redução de variáveis, e agregação das categorias em duas (classificação binária), os dados foram alimentados a diversos algoritmos de classificação supervisionadas, cujas métricas foram avaliadas para que fosse escolhido o modelo algoritmico de melhor desepenho para o problema.
+
+A solução foi produzida com uso de software livre (Python e bibliotecas Pandas, Numpy e SKLearn), bem como dados abertos.
+
 ### Métricas
 Nesta seção, você precisará definir claramente as métricas ou cálculos que você irá usar para avaliar o desempenho de um modelo ou resultado no seu projeto. Esses cálculos e métricas devem ser justificadas baseado nas características do problema e domínio do problema. Questões para se perguntar ao escrever esta seção:
 - _As métricas que você escolheu para medir o desempenho de seus modelos foram discutidas e definidas de forma clara?_
 - _Você forneceu justificativas razoáveis para as métricas escolhidas, baseando-se no problema e solução?_
 
+Podemos medir o quão bem resolvemos este problema a partir das taxas de acertos.
+
+Para o problema em questão, o número de falsos negativos não deveria ser um problema, e a métrica principal de revocação (recall), e não de precisão, torna-se mais apropriada. 
+
+Como métrica secundária, foi escolhida a acurácia do modelo, e como terceira métrica suplementar os tempos necessários para teste e treino, posto que um sistema destes deveria ser pouco exigente computacionalmente,  o bastante para possibilitar monitoramento e respostas em tempo real.
 
 ## II. Análise
 _(aprox. 2-4 páginas)_
@@ -33,11 +64,47 @@ Nesta seção, é esperado que você analise os dados que você está usando par
 - _Se **não** existe um conjunto de dados para o problema, foi realizada uma discussão sobre o espaço de entrada ou os dados de entrada do problema?_
 - _Existem anormalidades ou características acerca do espaço de entrada ou conjunto de dados que necessitem ser direcionados? (variáveis categóricas, valores faltando, valores atípicos, etc.)_
 
+Os dados foram carregados do _website_ e carregados no programa de análise, utilizando a IDE Jupyter.
+
+Os dados já foram fornecidos separados em um conjunto de treino e um conjunto de testes, com 7352 e 2947 observações, respectivamente.
+
+Cada conjunto de dados é compreendido por 563 colunas, sendo 561 variáveis contínuas - dados provenientes de acelerômetros com valores compreendidos no intervalo entre -1 e 1. Estas variáveis representam máximos, mínimos e médias de aceleração linear e angular em três direções, X, Y e Z, além de variáveis possivelmente derivadas como energia nas diferentes direções, ângulos, frequências...
+
+Além destas variáveis, há duas variáveis discretas no conjunto: uma numérica que representa os diversos voluntários que praticaram as atividades na construção do conjunto de dados - esta variável foi retirada dos conjuntos para o treino do algoritmo.
+
+Finalmente, uma variável discreta que representa as diversas atividades praticadas pelos volutários. 
+
+A ocorrência de cada uma destas atividades nas observações é razoavelmente equilibrada nos dois conjuntos de dados, de treino e de teste.
+
+Atividade|Contagem (treino)|Contagem (teste)
+---|---|---
+LAYING                |1407 | 537
+SITTING               |1286 | 491
+STANDING              |1374 | 532
+WALKING               |1226 | 496
+WALKING_DOWNSTAIRS    | 986 | 420
+WALKING_UPSTAIRS      |1073 | 471
+
+
 ### Visualização exploratória
 Nesta seção, você precisará fornecer alguma forma de visualização que sintetize ou evidencie uma característica ou atributo relevante sobre os dados. A visualização deve sustentar adequadamente os dados utilizados. Discuta por que essa visualização foi escolhida e por que é relevante. Questões para se perguntar ao escrever esta seção:
 - _Você visualizou uma característica ou um atributo relevante acerca do conjunto de dados ou dados de entrada?_
 - _A visualização foi completamente analisada e discutida?_
 - _Se um gráfico foi fornecido, os eixos, títulos e dados foram claramente definidos?_
+
+Para se ter ideia do perfil geral dos dados, foi plotada uma matriz de gráficos de dispersão de algumas variáveis, tomadas ao acaso.
+
+![alt text](https://github.com/renatogavioli/br-machine-learning/tree/master/projects/capstone/scatterplot.png)
+
+Para esta pequena amostra das variáveis, a maior parte delas parece ser normalmente distribuída. Ademais, é possível suspeitar alguma correlação entre alguns pares de variáveis.
+
+Foi criado um mapa de calor dos índices de correlação entre algumas variáveis, que é mostrdo a seguir. Em preto são mostrados os valores próximos de zero, e em azul ou vermelho os valores negativos ou positivos, se aproximando da cor branca quão mais afastados do valor central zero.
+
+![alt text](https://github.com/renatogavioli/br-machine-learning/tree/master/projects/capstone/heatmap_corr1.png)
+
+O gráfico confirma a suspeita de que as variáveis são em geral altamente correlacionadas. De fato, se calcularmos a média dos valores absolutos dos índices de correlação de todos os pares de variáveis, o valor resultante é 0.418. 
+
+Estes dados motivam um trabalho de engenharia de características para reduzir o número de variáveis, dado que a informação rpesente nelas provavelmente pode estar presente em diversas variáveis simultaneamente.
 
 ### Algoritmos e técnicas
 Nesta seção, você deverá discutir os algoritmos e técnicas que você pretende utilizar para solucionar o problema. Você deverá justificar o uso de cada algoritmo ou técnica baseado nas características do problema e domínio do problema. Questões para se perguntar ao escrever esta seção:
@@ -45,11 +112,26 @@ Nesta seção, você deverá discutir os algoritmos e técnicas que você preten
 - _As técnicas a serem usadas foram adequadamente discutidas e justificadas?_
 - _Ficou claro como os dados de entrada ou conjuntos de dados serão controlados pelos algoritmos e técnicas escolhidas?_
 
+Para a resolução do problema de identificação de quedas, a variáveil-alvo `'Activity'` foi processada, consolidando todas as demais categorias que não são `'LAYING'` numa categoria `'NOT_LAYING'`, de modo a simplificar o problema tornando-o um caso de classificação binária.
+
+Em seguida, utilizei a técnica de análise de componentes principais (PCA), para reduzir o número de variáveis e simplificar ainda mais o problema, dada a evidente correlação entre diversas variaveis.
+
+Finalmente, foram treinados 4 classificadores: regressão logística, _support vector machine_ (SVC), _naivebayes_ e _K-nearest neighbors_. Estes 4 algoritmos são simples e capazes de lidar com problemas de classificação binária. 
+
+Para avaliação do desempenho dos classificadores, foram utilizadas métricas de acurácia e de revocação (recall), além dos tempos necessários para processamento dos dados de treino e para realização das previsões.
+
+A implementação foi feita utilizando a biblioteca _sklearn_.
+
 ### Benchmark
 Nesta  seção, você deverá definir claramente um resultado de referência (benchmark) ou limiar para comparar entre desempenhos obtidos pela sua solução. O raciocínio por trás da referência (no caso onde não é estabelecido um resultado) deve ser discutido. Questões para se perguntar ao escrever esta seção:
 - _Algum resultado ou valor que funcione como referência para a medida de desempenho foi fornecido?_
 - _Ficou claro como esse resultado ou valor foi obtido (seja por dados ou por hipóteses)?_
 
+Dentre os _kernels_ disponíveis no Kaggle para os dados avaliados, o mais votado (disponível em [https://www.kaggle.com/morrisb/what-does-your-smartphone-know-about-you]) propõe um modelod de aprendizagem com acurácia de 0.9557.
+
+Com as simplificações propostas - classificação binária e engenharia de características com PCA - buscou-se uma acurácia maior que 0.9557, ainda que para uma solução menos generalista.
+
+AQUIIIIII
 
 ## III. Metodologia
 _(aprox. 3-5 páginas)_
