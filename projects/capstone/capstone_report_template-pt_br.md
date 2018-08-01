@@ -179,11 +179,13 @@ Como já descrito anteriormente, foram escolhidas como métricas principais a ac
 
 Para cálculo das métricas, foram utilizadas as funções disponibilizadas pela biblioteca `sklearn.metrics`. 
 
-Foram avaliados 4 algoritmos de treinamento, a saber:
+Foram avaliados 4 algoritmos simples de treinamento, a saber:
 - Regressão logística (`LogisticRegression`)
 - Naive bayes (`GaussianNB`)
 - Support vector machine (`SVC`)
 - k-nearest neighbors (`KNeighborsClassifier`)
+
+Os quatro algoritmos são prontamente aplicáveis para problemas de classificação binária como o que estamos lidando. 
 
 As etapas de treino e de teste (predição) foram cronometradas para cada algoritmo, resultando num indicador suplementar de performance.
 
@@ -206,12 +208,7 @@ Nesta seção, você deverá discutir o processo de aperfeiçoamento dos algorit
 - _O processo de melhoria foi documentado de foma clara, bem como as técnicas utilizadas?_
 - _As soluções intermediárias e finais foram reportadas claramente, conforme o processo foi sendo melhorado?_
 
-Era planejado o uso de uma estratégia de aprimoramento do melhor algoritmo obtido, através da aplicação de busca em matriz e otimização de hiperparâmetros para o algoritmo de maior desempenho em relação a acurácia e revocação. No entanto, o desempenho notável obtido, com scores de 1.0 para ambas acurácia e recall, tornam desnecessário qualquer refinamento de hiperparâmetros - estes índices indicam a inexistência de quaisquer observações classificadas errôneamente, como confirmado na matriz de confusão apresentada a seguir:
-
-||LAYING verdadeiro|NOT_LAYING verdadeiro|
-|---|---:|---:|
-|Previsto LAYING|537 | 0|
-|Previsto NOT_LAYING|0 | 2410|
+Era planejado o uso de uma estratégia de aprimoramento do melhor algoritmo obtido, através da aplicação de busca em matriz e otimização de hiperparâmetros para o algoritmo de maior desempenho em relação a acurácia e revocação. No entanto, o desempenho notável obtido, com scores de 1.0 para ambas acurácia e recall, tornam desnecessário qualquer refinamento de hiperparâmetros - estes índices indicam a inexistência de quaisquer observações classificadas errôneamente, como confirmado na matriz que é apresentada na prósima seção.
 
 ## IV. Resultados
 _(aprox. 2-3 páginas)_
@@ -223,12 +220,28 @@ Nesta seção, o modelo final e quaisquer qualidades que o sustentem devem ser a
 -_O modelo é robusto o suficiente para o problema? Pequenas perturbações (mudanças) nos dados de treinamento ou no espaço de entrada afetam os resultados de forma considerável?_
 - _Os resultados obtidos do modelo são confiáveis?_
 
+O modelo final obtido foi um modelo de regressão logística com os hiperparâmetros XPTO. O modelo foi treinado num conjunto de dados compreendido por 7352 observações, e testado em um subonjunto de dados com 297 observações. 
+
+O modelo final de regressão logística foi treinado com os parâmetros conforme tabela a seguir:
+
+XXXCXCXCSCSD
+
+Os resultados para esta rodada de testes são mostrados na matriz de confusão a seguir, mostrando-se razoável em suas respostas e alinhado com as expectativas de solução.
+
+||LAYING verdadeiro|NOT_LAYING verdadeiro|
+|---|---:|---:|
+|**Previsto LAYING**|537 | 0|
+|**Previsto NOT_LAYING**|0 | 2410|
+
 ### Justificativa
 Nesta seção, a solução final do seu modelo e os resultados dela obtidos devem ser comparados aos valores de referência (benchmark) que você estabeleceu anteriormente no projeto, usando algum tipo de análise estatística. Você deverá também justificar se esses resultados e a solução são significativas o suficiente para ter resolvido o problema apresentado no projeto. Questões para se perguntar ao escrever esta seção:
 - _Os resultados finais encontrados são mais fortes do que a referência reportada anteriormente?_
 - _Você analisou e discutiu totalmente a solução final?_
 - _A solução final é significativa o suficiente para ter resolvido o problema?_
 
+A solução final do modelo desenvolvido aparenta apresentar desempenho que supera o do modelo de referência. Este tipo de comparação talvez não possa ser feita diretamente, dado que a solução aqui apresentada baseia-se em uma série de preprocessamentos que tornam o problema razoavelmente mais simples - trata-se de um problema de classificação binária, e não de classificação multiclasse como o modelo de referência citado.
+
+Os resultados obtidos pelo modelo são significativos para a resolução do problema dentro de certos limites: os dados utilizados para sua construção foram obtidos num ambiente controlado, e o comportamento pode não ser o mesmo em uma situação real. Dito isso, ainda há bastante espaço para otimização de hiperparâmetros, sendo o resultado deste trabalho um primeiro passo na direção de desenvolver um modelo preditivo de queda.
 
 ## V. Conclusão
 _(aprox. 1-2 páginas)_
@@ -245,6 +258,8 @@ Nesta seção, você deverá resumir os procedimentos desde o problema até a so
 - _Houve algum aspecto interessante do projeto?_
 - _Houve algum aspecto difícil do projeto?_
 - _O modelo e solução final alinham-se com suas expectativas para o problema, e devem ser usadas de forma geral para resolver esses tipos de problemas?_
+
+
 
 ### Melhorias
 Nesta seção, você deverá discutir como um aspecto da sua implementação poderia ser melhorado. Por exemplo, considere maneiras de tornar a sua implementação mais geral e o que precisaria ser modificado. Você não precisa fazer a melhoria, mas as possíveis soluções que resultariam de tais mudanças devem ser consideradas e comparadas/contrastadas com a sua solução atual. Questões para se perguntar ao escrever esta seção:
