@@ -84,7 +84,7 @@ Finalmente, uma variável discreta que representa as diversas atividades pratica
 A ocorrência de cada uma destas atividades nas observações é razoavelmente equilibrada nos dois conjuntos de dados, de treino e de teste.
 
 Atividade|Contagem (treino)|Contagem (teste)
----|---|---
+:---|---:|---:
 LAYING                |1407 | 537
 SITTING               |1286 | 491
 STANDING              |1374 | 532
@@ -165,13 +165,38 @@ Para se ter uma ideia da eficácia da transformação, foi criado um mapa de cal
 
 ![heatmap_corr2](heatmap_corr2.png)
 
+Não foi preciso binarizar caractrísticas categóricas nem qualquer tipo de limpeza de dados inconsistentes ou outliers.
+
 ### Implementação
 Nesta seção, o processo de escolha de quais métricas, algoritmos e técnicas deveriam ser implementados para os dados apresentados deve estar claramente documentado. Deve estar bastante claro como a implementação foi feita, e uma discussão deve ser elaborada a respeito de quaisquer complicações ocorridas durante o processo.  Questões para se perguntar ao escrever esta seção:
 - _Ficou claro como os algoritmos e técnicas foram implementados com os conjuntos de dados e os dados de entrada apresentados?_
 - _Houve complicações com as métricas ou técnicas originais que acabaram exigindo mudanças antes de chegar à solução?_
 - _Houve qualquer parte do processo de codificação (escrita de funções complicadas, por exemplo) que deveriam ser documentadas?_
 
-Como já descrito anteriormente, foram escolhidas como métricas principais a acurácia e revocação.
+Como já descrito anteriormente, foram escolhidas como métricas principais a acurácia e revocação. Estas métricas foram calculadas de forma a comparar:
+- os dados de treino e suas respectivas previsões
+- os dados de teste e suas respectivas previsões
+
+Para cálculo das métricas, foram utilizadas as funções disponibilizadas pela biblioteca `sklearn.metrics`. 
+
+Foram avaliados 4 algoritmos de treinamento, a saber:
+- Regressão logística (`LogisticRegression`)
+- Naive bayes (`GaussianNB`)
+- Support vector machine (`SVC`)
+- k-nearest neighbors (`KNeighborsClassifier`)
+
+As etapas de treino e de teste (predição) foram cronometradas para cada algoritmo, resultando num indicador suplementar de performance.
+
+Os resultados da aplicação são mostrados na tabela a seguir:
+
+clf name		|accuracy test	|accuracy train |recall test	|recall train	|train time  |predict time
+:---|---:|---:|---:|---:|---:|---:|
+LogisticRegression	|1.000000	|1.000000 |1.000000	|1.000000	|0.073148	|0.000000	
+SVC	|1.000000	|0.999728	|1.000000	|1.000000	|0.102362	|0.030003
+KNeighborsClassifier	|0.999321	|0.999592		|0.996276	|1.000000	|0.022016|0.502816
+GaussianNB	|0.999321	|0.994967	|1.000000	|0.996446	|0.012022|0.003997
+
+Não foram encontrados problemas maiores na implantação do código, já que a totalidade das características são numéricas contínuas.
 
 ### Refinamento
 Nesta seção, você deverá discutir o processo de aperfeiçoamento dos algoritmos e técnicas usados em sua implementação. Por exemplo, ajuste de parâmetros para que certos modelos obtenham melhores soluções está dentro da categoria de refinamento. Suas soluções inicial e final devem ser registradas, bem como quaisquer outros resultados intermediários significativos, conforme o necessário. Questões para se perguntar ao escrever esta seção:
@@ -179,6 +204,7 @@ Nesta seção, você deverá discutir o processo de aperfeiçoamento dos algorit
 - _O processo de melhoria foi documentado de foma clara, bem como as técnicas utilizadas?_
 - _As soluções intermediárias e finais foram reportadas claramente, conforme o processo foi sendo melhorado?_
 
+Estava planejado o uso de uma estratégia de aprimoramento do melhor algoritmo obtido, através da aplicação de busca em matriz e otimização de hiperparâmetros. No entanto,
 
 ## IV. Resultados
 _(aprox. 2-3 páginas)_
