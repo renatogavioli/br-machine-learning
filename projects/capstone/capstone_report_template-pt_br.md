@@ -50,9 +50,16 @@ Nesta seção, você precisará definir claramente as métricas ou cálculos que
 
 Podemos medir o quão bem resolvemos este problema a partir das taxas de acertos.
 
-Para o problema em questão, o número de falsos negativos não deveria ser um problema, e a métrica principal de revocação (recall), e não de precisão, torna-se mais apropriada. 
+Para este problema, uma situação de não-queda que seja apontada como queda (falso positivo) não deve ser relevante, podendo ser desconsiderada pelo usuário. Já um falso negativo é extremamente indesejado, pois poderá resultar no usuário em situação de queda, sem que haja predição desta situação e eventual notificação.
 
-Como métrica secundária, foi escolhida a acurácia do modelo, e como terceira métrica suplementar os tempos necessários para teste e treino, posto que um sistema destes deveria ser pouco exigente computacionalmente,  o bastante para possibilitar monitoramento e respostas em tempo real.
+Deste modo, o número de falsos positivos não deveria ser um problema, e a métrica principal de revocação (recall), e não de precisão, torna-se mais apropriada:
+
+- revocação (recall), isto é, a razão entre o total de positivos verdadeiros, e o total de ocorrências positivas.
+- acurácia, isto é, razão entre total de acertos (positivos verdadeiros e negativos verdadeiros) e toda a população;
+
+A baixa tolerância a falsos negtivos motivou a não utilização do escore F1, que poderia ser resultante de uma precisão elevada e revocação baixa.
+
+Como terceira métrica suplementar os tempos necessários para teste e treino, posto que um sistema destes deveria ser pouco exigente computacionalmente,  o bastante para possibilitar monitoramento e respostas em tempo real.
 
 ## II. Análise
 _(aprox. 2-4 páginas)_
@@ -94,13 +101,13 @@ Nesta seção, você precisará fornecer alguma forma de visualização que sint
 
 Para se ter ideia do perfil geral dos dados, foi plotada uma matriz de gráficos de dispersão de algumas variáveis, tomadas ao acaso.
 
-![alt text](https://github.com/renatogavioli/br-machine-learning/tree/master/projects/capstone/scatterplot.png)
+![scatterplot](scatterplot.png)
 
 Para esta pequena amostra das variáveis, a maior parte delas parece ser normalmente distribuída. Ademais, é possível suspeitar alguma correlação entre alguns pares de variáveis.
 
 Foi criado um mapa de calor dos índices de correlação entre algumas variáveis, que é mostrdo a seguir. Em preto são mostrados os valores próximos de zero, e em azul ou vermelho os valores negativos ou positivos, se aproximando da cor branca quão mais afastados do valor central zero.
 
-![alt text](https://github.com/renatogavioli/br-machine-learning/tree/master/projects/capstone/heatmap_corr1.png)
+![heatmap_corr1](heatmap_corr1.png)
 
 O gráfico confirma a suspeita de que as variáveis são em geral altamente correlacionadas. De fato, se calcularmos a média dos valores absolutos dos índices de correlação de todos os pares de variáveis, o valor resultante é 0.418. 
 
@@ -129,9 +136,7 @@ Nesta  seção, você deverá definir claramente um resultado de referência (be
 
 Dentre os _kernels_ disponíveis no Kaggle para os dados avaliados, o mais votado (disponível em [https://www.kaggle.com/morrisb/what-does-your-smartphone-know-about-you]) propõe um modelod de aprendizagem com acurácia de 0.9557.
 
-Com as simplificações propostas - classificação binária e engenharia de características com PCA - buscou-se uma acurácia maior que 0.9557, ainda que para uma solução menos generalista.
-
-AQUIIIIII
+Com as simplificações propostas - classificação binária e engenharia de características com PCA - buscou-se uma acurácia maior que 0.9557, ainda que para uma solução menos generalista que a implementada no Kernel referenciado.
 
 ## III. Metodologia
 _(aprox. 3-5 páginas)_
@@ -142,11 +147,31 @@ Nesta seção, você deve documentar claramente todos os passos de pré-processa
 - _Baseado na seção de **Exploração de dados**, se existiram anormalidade ou características que precisem ser tratadas, elas foram adequadamente corrigidas?_
 - _Se não é necessário um pré-processamento, foi bem definido o porquê?_
 
+A base de dados utilizada passou por uma etapa de preprocessamento bastante simples.
+
+Inicialmente, cada um dos dois conjuntos de dados, `dt_train` e `dt_test`, foi processado de modo a dar origem a outros dois conjuntos cada, resultando em 4 dataframes: `X_train`, `y_train`, `X_test` e `y_test`.
+
+Os conjuntos `y_train` e `y_test` foram construídos apenas com a coluna de variável alvo `'Activity'`, a qual foi processada de modo a consolidar todas as categorias presentes em apenas duas: `'LAYING'` ou `'NOT_LAYING'`.
+
+Os conjuntos `X_train` e `X_test` foram construídos com as colunas referentes a todas as demais variáveis, à exceção da variável alvo `'Activity'` e da variável `'subject'`, que foi removida por se tratar de dado pouco relevante à análise.
+
+Em seguida, foi aplicada ao conjunto de treinamento `X_train` uma análise de componentes principais, com o objetivo de simplificar o problema, mitigando eventuais dificuldades relacionadas à complexidade do modelo, decorrente da chamada _maldição da dimensionalidade (curse of dimensionality)_.
+
+O algoritmo PCA foi aplicado para 50 variáveis componentes - este valor foi determinado empiricamente, sendo o resultado de uma exploração que buscou obter uma quantidade significativa de variância total dos dados explicada pelas componentes. Os 50 componentes obtidos foram capazes de explicar cerca de 0.93 da variância dos dados.
+
+Após a análise de componentes principais, ambos os conjuntos de características de treino e teste (`X_train` e `X_test`) foram transformados.
+
+Para se ter uma ideia da eficácia da transformação, foi criado um mapa de calor semelhante ao criado na anális exploratória, o qual é mostrado a seguir. Os índices de correlação entre as variáveis componentes obtidas é sempre muito próxima de zero.
+
+![heatmap_corr2](heatmap_corr2.png)
+
 ### Implementação
 Nesta seção, o processo de escolha de quais métricas, algoritmos e técnicas deveriam ser implementados para os dados apresentados deve estar claramente documentado. Deve estar bastante claro como a implementação foi feita, e uma discussão deve ser elaborada a respeito de quaisquer complicações ocorridas durante o processo.  Questões para se perguntar ao escrever esta seção:
 - _Ficou claro como os algoritmos e técnicas foram implementados com os conjuntos de dados e os dados de entrada apresentados?_
 - _Houve complicações com as métricas ou técnicas originais que acabaram exigindo mudanças antes de chegar à solução?_
 - _Houve qualquer parte do processo de codificação (escrita de funções complicadas, por exemplo) que deveriam ser documentadas?_
+
+Como já descrito anteriormente, foram escolhidas como métricas principais a acurácia e revocação.
 
 ### Refinamento
 Nesta seção, você deverá discutir o processo de aperfeiçoamento dos algoritmos e técnicas usados em sua implementação. Por exemplo, ajuste de parâmetros para que certos modelos obtenham melhores soluções está dentro da categoria de refinamento. Suas soluções inicial e final devem ser registradas, bem como quaisquer outros resultados intermediários significativos, conforme o necessário. Questões para se perguntar ao escrever esta seção:
