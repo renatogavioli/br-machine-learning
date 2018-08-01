@@ -196,6 +196,8 @@ SVC	|1.000000	|0.999728	|1.000000	|1.000000	|0.102362	|0.030003
 KNeighborsClassifier	|0.999321	|0.999592		|0.996276	|1.000000	|0.022016|0.502816
 GaussianNB	|0.999321	|0.994967	|1.000000	|0.996446	|0.012022|0.003997
 
+Foram obtidos resultados notáveis nesta etapa do projeto, particularmente com o algoritmo de regressão logística, que obteve desempenho igual a 1.0 para ambas métricas de desempenho.
+
 Não foram encontrados problemas maiores na implantação do código, já que a totalidade das características são numéricas contínuas.
 
 ### Refinamento
@@ -204,7 +206,8 @@ Nesta seção, você deverá discutir o processo de aperfeiçoamento dos algorit
 - _O processo de melhoria foi documentado de foma clara, bem como as técnicas utilizadas?_
 - _As soluções intermediárias e finais foram reportadas claramente, conforme o processo foi sendo melhorado?_
 
-Estava planejado o uso de uma estratégia de aprimoramento do melhor algoritmo obtido, através da aplicação de busca em matriz e otimização de hiperparâmetros. No entanto,
+Estava planejado o uso de uma estratégia de aprimoramento do melhor algoritmo obtido, através da aplicação de busca em matriz e otimização de hiperparâmetros. No entanto, o desempenho notável obtido, com scores de 1.0 para ambas acurácia e recall, impossibilitaram qualquer refinamento de hiperparâmetros - estes índices indicam a inexistência de quaisquer observações classificadas errôneamente, como é mostrado na matriz de confusão abaixo:
+
 
 ## IV. Resultados
 _(aprox. 2-3 páginas)_
