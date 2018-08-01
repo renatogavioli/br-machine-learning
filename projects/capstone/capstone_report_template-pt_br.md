@@ -259,7 +259,17 @@ Nesta seção, você deverá resumir os procedimentos desde o problema até a so
 - _Houve algum aspecto difícil do projeto?_
 - _O modelo e solução final alinham-se com suas expectativas para o problema, e devem ser usadas de forma geral para resolver esses tipos de problemas?_
 
+Para a resolução do problema, a primeira etapa foi explorar os dados - as características dos mesmos posibilitaram ter _insights_ importantes sobre as características das variáveis: se era necessária alguma limpeza nos dados, quais poderiam ser eliminadas imediatamente, como a característica alvo poderia ser tratada e consolidada para simplificar o problema, e se seria necessária uma estratégia de redução de dimensionalidade. 
 
+Em seguida, foi realizada uma etapa de enenharia de características, composta principalmente por análise de componentes principais. Com essa análise, foi possível reduzir significativamente o número de características, simplificando ainda mais o problema.
+
+Finalmente, foram treinados alguns algoritmos de aprendizagem, os quais foram avaliados com relação às métricas escolhidas, sendo escolhido o de melhor desempenho. Era prevista uma etapa de otimização de hiperparâmetros com a técnica de busca em matriz, porém esta etapa não foi realizada.
+
+O aspecto mais interessante do projeto foi o preprocessamento dos dados, no qual o entendimento sobre as relações entre as variáveis possibilitou que eu agisse de forma deliberada na engenharia de característica e remoção de variáveis. Achei extremamente gratificante me sentir com desenvoltura para usar este tipo de ferramenta (PCA particularmente), e a relevância dos resultados obtidos por elas.
+
+Minhas maiores dificuldades foram na tentativa de entender o significado físico das componentes principais obtidas após a PCA - as componentes podem agregar variáveis com significados físicos e até unidades de medida diferentes...! 
+
+Outra dificuldade que senti foi em 'aceitar' os resultados dos modelos com acurácia e revocação iguais a 1.0 - esperava valores menores que 1.0, que permitissem otimização de hiperparâmetros. Acredito que, com um conjunto de dados maior ou mais 'sujo', isso seria menos provável de ocorrer. No entanto 
 
 ### Melhorias
 Nesta seção, você deverá discutir como um aspecto da sua implementação poderia ser melhorado. Por exemplo, considere maneiras de tornar a sua implementação mais geral e o que precisaria ser modificado. Você não precisa fazer a melhoria, mas as possíveis soluções que resultariam de tais mudanças devem ser consideradas e comparadas/contrastadas com a sua solução atual. Questões para se perguntar ao escrever esta seção:
