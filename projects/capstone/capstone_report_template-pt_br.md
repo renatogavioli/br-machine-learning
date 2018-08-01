@@ -208,10 +208,10 @@ Nesta seção, você deverá discutir o processo de aperfeiçoamento dos algorit
 
 Era planejado o uso de uma estratégia de aprimoramento do melhor algoritmo obtido, através da aplicação de busca em matriz e otimização de hiperparâmetros para o algoritmo de maior desempenho em relação a acurácia e revocação. No entanto, o desempenho notável obtido, com scores de 1.0 para ambas acurácia e recall, tornam desnecessário qualquer refinamento de hiperparâmetros - estes índices indicam a inexistência de quaisquer observações classificadas errôneamente, como confirmado na matriz de confusão apresentada a seguir:
 
-|LAYING verdadeiro|NOT_LAYING verdadeiro
----|---: |---: 
-Previsto LAYING|537 | 0
-Previsto NOT_LAYING|0 | 2410
+||LAYING verdadeiro|NOT_LAYING verdadeiro|
+|---|---:|---:|
+|Previsto LAYING|537 | 0|
+|Previsto NOT_LAYING|0 | 2410|
 
 ## IV. Resultados
 _(aprox. 2-3 páginas)_
