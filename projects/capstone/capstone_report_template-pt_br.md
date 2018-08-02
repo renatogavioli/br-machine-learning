@@ -157,7 +157,87 @@ Os conjuntos `X_train` e `X_test` foram construídos com as colunas referentes a
 
 Em seguida, foi aplicada ao conjunto de treinamento `X_train` uma análise de componentes principais, com o objetivo de simplificar o problema, mitigando eventuais dificuldades relacionadas à complexidade do modelo, decorrente da chamada _maldição da dimensionalidade (curse of dimensionality)_.
 
-O algoritmo PCA foi aplicado para 50 variáveis componentes - este valor foi determinado empiricamente, sendo o resultado de uma exploração que buscou obter uma quantidade significativa de variância total dos dados explicada pelas componentes. Os 50 componentes obtidos foram capazes de explicar cerca de 0.93 da variância dos dados.
+O algoritmo PCA foi aplicado para 50 variáveis componentes - este valor foi determinado empiricamente, sendo o resultado de uma exploração que buscou obter uma quantidade significativa de variância total dos dados explicada pelas componentes. Os 50 componentes obtidos foram capazes de explicar cerca de 0.93 da variância dos dados. A variância relativa de cada componente é mostrada na tabela a seguir.
+
+Componente|Explained variance ratio
+---:| ---:|
+0|	0.625544
+1|	0.049130
+2|	0.041215
+3|	0.018750
+4|	0.016949
+5|	0.012721
+6	|0.011767
+7|	0.010690
+8	|0.009694
+9|	0.008580
+10|	0.007623
+11|	0.006724
+12|	0.005794
+13|	0.005579
+14|	0.004989
+15|	0.004749
+16|	0.004672
+17|	0.004316
+18|	0.004257
+19|	0.004104
+20|	0.003940
+21|	0.003753
+22|	0.003524
+23|	0.003394
+24|	0.003321
+25|	0.003194
+26|	0.003018
+27|	0.002918
+28|	0.002896
+29|	0.002819
+30|	0.002767
+31|	0.002634
+32|	0.002553
+33|	0.002359
+34|	0.002307
+35|	0.002236
+36|	0.002229
+37|	0.002103
+38|	0.002084
+39|	0.002048
+40|	0.001928
+41|	0.001889
+42|	0.001812
+43|	0.001795
+44|	0.001723
+45|	0.001601
+46|	0.001569
+47|	0.001565
+48|	0.001527
+49	|0.001500
+
+Foram inspecionadas as 20 variáveis de maiores contribuições para a primeira componente principal:
+
+Variável | Contribuição (direção)
+--- | ---:
+fBodyAccJerk-entropy()-X	|0.125230
+fBodyAccJerk-entropy()-Y	|0.122470
+tBodyAccJerkMag-entropy()	|0.120568
+fBodyAcc-entropy()-X	|0.120216
+fBodyAccMag-entropy()	|0.113367
+tBodyGyroJerkMag-entropy()	|0.112255
+fBodyBodyAccJerkMag-entropy()|	0.112088
+fBodyAcc-entropy()-Y	|0.110593
+tGravityAccMag-entropy()|	0.107665
+tBodyAccMag-entropy()	|0.107665
+fBodyAccJerk-entropy()-Z|	0.107166
+tBodyAccJerk-entropy()-X|	0.106156
+fBodyBodyGyroJerkMag-entropy()|	0.104365
+tBodyAccJerk-entropy()-Y|	0.103868
+fBodyAcc-entropy()-Z	|0.102172
+fBodyGyro-entropy()-Y	|0.100928
+tBodyAccJerk-entropy()-Z|	0.100456
+fBodyGyro-entropy()-Z	|0.099746
+fBodyBodyGyroMag-entropy()|	0.099734
+fBodyGyro-entropy()-X	|0.099672
+
+As características de maior contribuição são as de caráter de entropia relacionadas à aceleração e arrancada (jerk), que é a variação instantânea da aceleração.
 
 Após a análise de componentes principais, ambos os conjuntos de características de treino e teste (`X_train` e `X_test`) foram transformados.
 
@@ -222,9 +302,22 @@ Nesta seção, o modelo final e quaisquer qualidades que o sustentem devem ser a
 
 O modelo final obtido foi um modelo de regressão logística com os hiperparâmetros XPTO. O modelo foi treinado num conjunto de dados compreendido por 7352 observações, e testado em um subonjunto de dados com 297 observações. 
 
-O modelo final de regressão logística foi treinado com os parâmetros conforme tabela a seguir:
+O modelo final de regressão logística foi treinado com os coeficientes conforme listados a seguir:
 
-XXXCXCXCSCSD
+`
+lr.coef_ = [[ 0.4278084 , -0.48216185, -3.48114521,  0.66226565,  0.62032767,
+         0.59808414, -0.7030771 , -0.40759882, -0.23849655,  0.37170711,
+         0.91723785,  0.09594431, -0.80197278, -0.48312219, -0.4091375 ,
+         0.06993872,  0.45918652,  0.26403763, -0.39250402,  0.01451421,
+         0.22729588, -1.68330745, -1.0570208 , -0.56027822, -0.69681163,
+         0.87791375,  0.10410775,  0.68379368,  0.43910915, -0.23368687,
+        -0.80163596, -1.08668539, -0.15665158, -0.79911478,  0.25407517,
+         0.0867431 , -0.15247749,  0.09771374,  0.07835925, -0.44980876,
+         0.69490755,  0.03079006,  0.47693241, -0.40207427, -0.92107115,
+         0.39244203,  0.48758815, -1.0780021 , -0.11453316,  0.17013243]]
+
+lr.intercept_ = [4.79964236]
+`
 
 Os resultados para esta rodada de testes são mostrados na matriz de confusão a seguir, mostrando-se razoável em suas respostas e alinhado com as expectativas de solução.
 
@@ -242,6 +335,7 @@ Nesta seção, a solução final do seu modelo e os resultados dela obtidos deve
 A solução final do modelo desenvolvido aparenta apresentar desempenho que supera o do modelo de referência. Este tipo de comparação talvez não possa ser feita diretamente, dado que a solução aqui apresentada baseia-se em uma série de preprocessamentos que tornam o problema razoavelmente mais simples - trata-se de um problema de classificação binária, e não de classificação multiclasse como o modelo de referência citado.
 
 Os resultados obtidos pelo modelo são significativos para a resolução do problema dentro de certos limites: os dados utilizados para sua construção foram obtidos num ambiente controlado, e o comportamento pode não ser o mesmo em uma situação real. Dito isso, ainda há bastante espaço para otimização de hiperparâmetros, sendo o resultado deste trabalho um primeiro passo na direção de desenvolver um modelo preditivo de queda.
+
 
 ## V. Conclusão
 _(aprox. 1-2 páginas)_
@@ -269,13 +363,26 @@ O aspecto mais interessante do projeto foi o preprocessamento dos dados, no qual
 
 Minhas maiores dificuldades foram na tentativa de entender o significado físico das componentes principais obtidas após a PCA - as componentes podem agregar variáveis com significados físicos e até unidades de medida diferentes...! 
 
-Outra dificuldade que senti foi em 'aceitar' os resultados dos modelos com acurácia e revocação iguais a 1.0 - esperava valores menores que 1.0, que permitissem otimização de hiperparâmetros. Acredito que, com um conjunto de dados maior ou mais 'sujo', isso seria menos provável de ocorrer. No entanto 
+Outra dificuldade que senti foi em 'aceitar' os resultados dos modelos com acurácia e revocação iguais a 1.0 - esperava valores menores que 1.0, que permitissem otimização de hiperparâmetros. Acredito que, com um conjunto de dados maior ou mais 'sujo', estes escores tão elevados seriam menos prováveis. No entanto, ao repensar as etapas prévias de engenharia de características e simplificação do problema, acabei por aceitar o resultado.
+
+O modelo e a solução final alinham-se com as minhas expectativas de resolução para o problema. Porém, este tipo de abordagem foi particular para um problema de classificação binária bastante simples, e eu não acredito que pudesse ser utilizado de forma geral para outros problemas de classificação - outras estratégias podem ser necessárias para problemas de maior complexidade.
 
 ### Melhorias
 Nesta seção, você deverá discutir como um aspecto da sua implementação poderia ser melhorado. Por exemplo, considere maneiras de tornar a sua implementação mais geral e o que precisaria ser modificado. Você não precisa fazer a melhoria, mas as possíveis soluções que resultariam de tais mudanças devem ser consideradas e comparadas/contrastadas com a sua solução atual. Questões para se perguntar ao escrever esta seção:
 - _Existem melhorias futuras que podem ser feitas nos algoritmos ou técnicas que você usou neste projeto?_
 - _Existem algoritmos ou técnicas que você pesquisou, porém não soube como implementá-las, mas consideraria usar se você soubesse como?_
 - _Se você usou sua solução final como nova referência, você acredita existir uma solução ainda melhor?_
+
+Como já foi colocado, uma ação que poderia ser aprimorada é a construção de um modelo mais generaliável, em detrimento da simplificação do problema. 
+
+Esta solução mais generalizável provavelmente será necessária conforme mais dados possam ser coletados e utilizados, que incluam:
+ - dados coletados em situação real, e não por voluntários
+ - dados relativos a outras atividades
+ - transições entre diferentes atividades
+ - atividades realizadas por indivíduos com diferentes condições de dificuldades motoras
+ - dados de acelerometria de queda de indivíduos
+  
+Acredito que tal solução poderia utilizar outros modelos de aprendizagem, inclusive combinações de modelos (stacking) ou aprendizagem por reforço.
 
 -----------
 
