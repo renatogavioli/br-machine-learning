@@ -1,14 +1,14 @@
 # Nanodegree Engenheiro de Machine Learning
 ## Projeto final - Reconhecimento de Atividades Usando Dados de Smartphone
+
 Renato Rosafa Gavioli 
+
 03 de agosto de 2018
 
+------------------------
 ## I. Definição
 
 ### Visão geral do projeto
-Nesta seção, procure fornecer uma visão de alto nível do projeto em linguagem simples. Questões para se perguntar ao escrever esta seção:
-- _Foi fornecido um resumo do projeto final, bem como o domínio do problema, a origem do projeto e o conjunto de dados ou entradas?_
-- _Foram dadas informações suficientes sobre o contexto para que um leitor desinformado possa entender o domínio e a enunciação problema?_
 
 A evolução da pirâmide etária brasileira vem apontando para um gradual envelhecimento da população. Este envelhecimento, caracterizado por um aumento na quntidade de idosos na população, é decorrente do crescente grau de urbanização do desenvolvimento econômico e humano do país [https://www.ibge.gov.br/apps/populacao/projecao/, acesso em 09.07.2018].
 
@@ -21,10 +21,6 @@ O monitoramento e análise dos dados proveniente de sensores inerciais como acel
 Deste modo, o objetivo deste projeto foi treinar um algoritmo capaz de identificar de forma automática a queda de um indivíduo, a partir de dados obtidos de sensores inerciais presentes em um _smartphone_.
 
 ### Descrição do problema
-Nesta seção, você irá definir o problema que você está tentando resolver de forma clara, incluindo a estratégia (resumo das tarefas) que você irá utilizar para alcançar a solução desejada. Você deverá também discutir detalhadamente qual será a solução pretendida para este problema. Questões para se perguntar ao escrever esta seção:
-- _A enunciação do problema foi claramente definida? O leitor irá entender o que você está esperando resolver?_
-- _Você discutiu detalhadamente como irá tentar resolver o problema?_
-- _A solução antecipada está claramente definida? O leitor entenderá quais resultados você está procurando?_
 
 O problema a ser resolvido é um problema de classificação supervisionada. 
 
@@ -43,9 +39,6 @@ Após a redução de variáveis, e agregação das categorias em duas (classific
 A solução foi produzida com uso de software livre (Python e bibliotecas Pandas, Numpy e SKLearn), bem como dados abertos.
 
 ### Métricas
-Nesta seção, você precisará definir claramente as métricas ou cálculos que você irá usar para avaliar o desempenho de um modelo ou resultado no seu projeto. Esses cálculos e métricas devem ser justificadas baseado nas características do problema e domínio do problema. Questões para se perguntar ao escrever esta seção:
-- _As métricas que você escolheu para medir o desempenho de seus modelos foram discutidas e definidas de forma clara?_
-- _Você forneceu justificativas razoáveis para as métricas escolhidas, baseando-se no problema e solução?_
 
 Podemos medir o quão bem resolvemos este problema a partir das taxas de acertos.
 
@@ -61,14 +54,8 @@ A baixa tolerância a falsos negtivos motivou a não utilização do escore F1, 
 Como terceira métrica suplementar os tempos necessários para teste e treino, posto que um sistema destes deveria ser pouco exigente computacionalmente,  o bastante para possibilitar monitoramento e respostas em tempo real.
 
 ## II. Análise
-_(aprox. 2-4 páginas)_
 
 ### Exploração dos dados
-Nesta seção, é esperado que você analise os dados que você está usando para o problema. Esses dados podem ser tanto na forma de um conjunto de dados (ou conjuntos de dados), dados de entrada (ou arquivos de entrada), ou até um ambiente. O tipo de dados deve ser descrito detalhadamente e, se possível, ter estatísticas e informações básicas apresentadas (tais como discussão dos atributos de entrada ou definição de características das entradas ou do ambiente) Qualquer anormalidade ou qualidade interessante dos dados que possam precisar ser devidamente tratadas devem ser identificadas (tais como características que precisem ser transformadas ou a possibilidade de valores atípicos) Questões para se perguntar ao escrever esta seção:
-- _Se exite um conjunto de dados para o problema em questão, você discutiu totalmente as características desse conjunto? Uma amostra dos dados foi oferecida ao leitor?_
-- _Se existe um conjunto de dados para o problema, as estatísticas sobre eles foram calculadas e reportadas? Foram discutidos quaisquer resultados relevantes desses cálculos?_
-- _Se **não** existe um conjunto de dados para o problema, foi realizada uma discussão sobre o espaço de entrada ou os dados de entrada do problema?_
-- _Existem anormalidades ou características acerca do espaço de entrada ou conjunto de dados que necessitem ser direcionados? (variáveis categóricas, valores faltando, valores atípicos, etc.)_
 
 Os dados foram carregados do _website_ e carregados no programa de análise, utilizando a IDE Jupyter.
 
@@ -93,10 +80,6 @@ WALKING_UPSTAIRS      |1073 | 471
 
 
 ### Visualização exploratória
-Nesta seção, você precisará fornecer alguma forma de visualização que sintetize ou evidencie uma característica ou atributo relevante sobre os dados. A visualização deve sustentar adequadamente os dados utilizados. Discuta por que essa visualização foi escolhida e por que é relevante. Questões para se perguntar ao escrever esta seção:
-- _Você visualizou uma característica ou um atributo relevante acerca do conjunto de dados ou dados de entrada?_
-- _A visualização foi completamente analisada e discutida?_
-- _Se um gráfico foi fornecido, os eixos, títulos e dados foram claramente definidos?_
 
 Para se ter ideia do perfil geral dos dados, foi plotada uma matriz de gráficos de dispersão de algumas variáveis, tomadas ao acaso.
 
@@ -113,10 +96,6 @@ O gráfico confirma a suspeita de que as variáveis são em geral altamente corr
 Estes dados motivam um trabalho de engenharia de características para reduzir o número de variáveis, dado que a informação rpesente nelas provavelmente pode estar presente em diversas variáveis simultaneamente.
 
 ### Algoritmos e técnicas
-Nesta seção, você deverá discutir os algoritmos e técnicas que você pretende utilizar para solucionar o problema. Você deverá justificar o uso de cada algoritmo ou técnica baseado nas características do problema e domínio do problema. Questões para se perguntar ao escrever esta seção:
-- _Os algoritmos que serão utilizados, incluindo quaisquer variáveis/parâmetros padrão do projeto, foram claramente definidos?_
-- _As técnicas a serem usadas foram adequadamente discutidas e justificadas?_
-- _Ficou claro como os dados de entrada ou conjuntos de dados serão controlados pelos algoritmos e técnicas escolhidas?_
 
 Para a resolução do problema de identificação de quedas, a variáveil-alvo `'Activity'` foi processada, consolidando todas as demais categorias que não são `'LAYING'` numa categoria `'NOT_LAYING'`, de modo a simplificar o problema tornando-o um caso de classificação binária.
 
@@ -129,22 +108,14 @@ Para avaliação do desempenho dos classificadores, foram utilizadas métricas d
 A implementação foi feita utilizando a biblioteca _sklearn_.
 
 ### Benchmark
-Nesta  seção, você deverá definir claramente um resultado de referência (benchmark) ou limiar para comparar entre desempenhos obtidos pela sua solução. O raciocínio por trás da referência (no caso onde não é estabelecido um resultado) deve ser discutido. Questões para se perguntar ao escrever esta seção:
-- _Algum resultado ou valor que funcione como referência para a medida de desempenho foi fornecido?_
-- _Ficou claro como esse resultado ou valor foi obtido (seja por dados ou por hipóteses)?_
 
-Dentre os _kernels_ disponíveis no Kaggle para os dados avaliados, o mais votado (disponível em [https://www.kaggle.com/morrisb/what-does-your-smartphone-know-about-you]) propõe um modelod de aprendizagem com acurácia de 0.9557.
+Dentre os _kernels_ disponíveis no Kaggle para os dados avaliados, o mais votado (disponível em [https://www.kaggle.com/morrisb/what-does-your-smartphone-know-about-you]) descreve um modelo de aprendizagem com acurácia de 0.9557.
 
-Com as simplificações propostas - classificação binária e engenharia de características com PCA - buscou-se uma acurácia maior que 0.9557, ainda que para uma solução menos generalista que a implementada no Kernel referenciado.
+Com as simplificações propostas - classificação binária e engenharia de características com PCA - buscou-se uma acurácia maior que 0.9557, ainda que para uma solução menos generalizável que a implementada no Kernel referenciado.
 
 ## III. Metodologia
-_(aprox. 3-5 páginas)_
 
 ### Pré-processamento de dados
-Nesta seção, você deve documentar claramente todos os passos de pré-processamento que você pretende fazer, caso algum seja necessário. A partir da seção anterior, quaisquer anormalidades ou características que você identificou no conjunto de dados deverão ser adequadamente direcionadas e tratadas aqui. Questões para se perguntar ao escrever esta seção:
-- _Se os algoritmos escolhidos requerem passos de pré-processamento, como seleção ou transformações de atributos, tais passos foram adequadamente documentados?_
-- _Baseado na seção de **Exploração de dados**, se existiram anormalidade ou características que precisem ser tratadas, elas foram adequadamente corrigidas?_
-- _Se não é necessário um pré-processamento, foi bem definido o porquê?_
 
 A base de dados utilizada passou por uma etapa de preprocessamento bastante simples.
 
@@ -152,9 +123,9 @@ Inicialmente, cada um dos dois conjuntos de dados, `dt_train` e `dt_test`, foi p
 
 Os conjuntos `y_train` e `y_test` foram construídos apenas com a coluna de variável alvo `'Activity'`, a qual foi processada de modo a consolidar todas as categorias presentes em apenas duas: `'LAYING'` ou `'NOT_LAYING'`.
 
-Os conjuntos `X_train` e `X_test` foram construídos com as colunas referentes a todas as demais variáveis, à exceção da variável alvo `'Activity'` e da variável `'subject'`, que foi removida por se tratar de dado pouco relevante à análise.
+Os conjuntos `X_train` e `X_test` foram construídos com as colunas referentes a todas as demais variáveis, à exceção da variável alvo `'Activity'` e da variável `'subject'`, que foi removida por se tratar de informação pouco relevante à análise - não queremos que informações sobre cada indivíduo 'vazem' para nossa classificação.
 
-Em seguida, foi aplicada ao conjunto de treinamento `X_train` uma análise de componentes principais, com o objetivo de simplificar o problema, mitigando eventuais dificuldades relacionadas à complexidade do modelo, decorrente da chamada _maldição da dimensionalidade (curse of dimensionality)_.
+Em seguida, tendo em vista a elevada correlação entre diversos pares de variáveis, foi aplicada ao conjunto de treinamento `X_train` uma análise de componentes principais, com o objetivo de simplificar o problema, mitigando eventuais dificuldades relacionadas à complexidade do modelo, decorrente da chamada _maldição da dimensionalidade (curse of dimensionality)_.
 
 O algoritmo PCA foi aplicado para 50 variáveis componentes - este valor foi determinado empiricamente, sendo o resultado de uma exploração que buscou obter uma quantidade significativa de variância total dos dados explicada pelas componentes. Os 50 componentes obtidos foram capazes de explicar cerca de 0.93 da variância dos dados. A variância relativa de cada componente é mostrada na tabela a seguir.
 
@@ -211,9 +182,9 @@ Componente|Explained variance ratio
 48|	0.001527
 49	|0.001500
 
-Foram inspecionadas as 20 variáveis de maiores contribuições para a primeira componente principal:
+Foram inspecionadas as 20 características de maiores contribuições para a primeira componente principal:
 
-Variável | Contribuição (direção)
+Característica | Contribuição
 --- | ---:
 fBodyAccJerk-entropy()-X	|0.125230
 fBodyAccJerk-entropy()-Y	|0.122470
@@ -247,10 +218,6 @@ Para se ter uma ideia da eficácia da transformação, foi criado um mapa de cal
 Não foi preciso binarizar caractrísticas categóricas nem qualquer tipo de limpeza de dados inconsistentes ou outliers.
 
 ### Implementação
-Nesta seção, o processo de escolha de quais métricas, algoritmos e técnicas deveriam ser implementados para os dados apresentados deve estar claramente documentado. Deve estar bastante claro como a implementação foi feita, e uma discussão deve ser elaborada a respeito de quaisquer complicações ocorridas durante o processo.  Questões para se perguntar ao escrever esta seção:
-- _Ficou claro como os algoritmos e técnicas foram implementados com os conjuntos de dados e os dados de entrada apresentados?_
-- _Houve complicações com as métricas ou técnicas originais que acabaram exigindo mudanças antes de chegar à solução?_
-- _Houve qualquer parte do processo de codificação (escrita de funções complicadas, por exemplo) que deveriam ser documentadas?_
 
 Como já descrito anteriormente, foram escolhidas como métricas principais a acurácia e revocação. Estas métricas foram calculadas de forma a comparar:
 - os dados de treino e suas respectivas previsões
@@ -279,29 +246,28 @@ GaussianNB	|0.999321	|0.994967	|1.000000	|0.996446	|0.012022|0.003997
 
 Foram obtidos resultados notáveis nesta etapa do projeto, particularmente com o algoritmo de regressão logística, que obteve desempenho igual a 1.0 para ambas métricas de desempenho.
 
-Não foram encontrados problemas maiores na implantação do código, já que a totalidade das características são numéricas contínuas.
+Não foram encontrados problemas maiores na implantação do código. A redução de dimensionalidade foi capaz de reduzir a complexidade domodelo de modo suficiente, e não foi necessário nenhum tipo de processamento adicional dos dados já que a totalidade das características são numéricas contínuas.
 
 ### Refinamento
-Nesta seção, você deverá discutir o processo de aperfeiçoamento dos algoritmos e técnicas usados em sua implementação. Por exemplo, ajuste de parâmetros para que certos modelos obtenham melhores soluções está dentro da categoria de refinamento. Suas soluções inicial e final devem ser registradas, bem como quaisquer outros resultados intermediários significativos, conforme o necessário. Questões para se perguntar ao escrever esta seção:
-- _Uma solução inicial foi encontrada e claramente reportada?_
-- _O processo de melhoria foi documentado de foma clara, bem como as técnicas utilizadas?_
-- _As soluções intermediárias e finais foram reportadas claramente, conforme o processo foi sendo melhorado?_
 
-Era planejado o uso de uma estratégia de aprimoramento do melhor algoritmo obtido, através da aplicação de busca em matriz e otimização de hiperparâmetros para o algoritmo de maior desempenho em relação a acurácia e revocação. No entanto, o desempenho notável obtido, com scores de 1.0 para ambas acurácia e recall, tornam desnecessário qualquer refinamento de hiperparâmetros - estes índices indicam a inexistência de quaisquer observações classificadas errôneamente, como confirmado na matriz que é apresentada na prósima seção.
+Era planejado o uso de uma estratégia de aprimoramento do melhor algoritmo obtido, através da aplicação de busca em matriz e otimização de hiperparâmetros para o algoritmo de maior desempenho em relação a acurácia e revocação. No entanto, o desempenho notável obtido, com scores de 1.0 para ambas acurácia e recall, tornam desnecessário qualquer refinamento de hiperparâmetros - estes índices indicam a inexistência de quaisquer observações classificadas errôneamente, como confirmado na matriz que é apresentada na próxima seção.
 
 ## IV. Resultados
-_(aprox. 2-3 páginas)_
 
 ### Modelo de avaliação e validação
-Nesta seção, o modelo final e quaisquer qualidades que o sustentem devem ser avaliadas em detalhe. Deve ficar claro como o modelo final foi obtido e por que tal modelo foi escolhido. Além disso, algum tipo de análise deve ser realizada para validar a robustez do modelo e sua solução, como, por exemplo, manipular os dados de entrada ou o ambiente para ver como a solução do modelo é afetada (técnica chamada de análise sensitiva). Questões para se perguntar ao escrever esta seção:
-- _O modelo final é razoável e alinhado com as expectativas de solução? Os parâmetros finais do modelo são apropriados?_
-- _O modelo final foi testado com várias entradas para avaliar se o modelo generaliza bem com dados não vistos?_
--_O modelo é robusto o suficiente para o problema? Pequenas perturbações (mudanças) nos dados de treinamento ou no espaço de entrada afetam os resultados de forma considerável?_
-- _Os resultados obtidos do modelo são confiáveis?_
 
-O modelo final obtido foi um modelo de regressão logística com os hiperparâmetros `{'C': 1.0, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'max_iter': 100, 'multi_class': 'ovr', 'n_jobs': 1, 'penalty': 'l2', 'random_state': None, 'solver': 'liblinear', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}`. O modelo foi treinado num conjunto de dados compreendido por 7352 observações, e testado em um subonjunto de dados com 1297 observações. 
+O modelo final foi treinado num conjunto de dados compreendido por 7352 observações, e testado para avaliar sua robustez em um subonjunto de dados de teste com 2947 observações. 
 
-O modelo final de regressão logística foi treinado com os coeficientes conforme listados a seguir:
+Os resultados para esta rodada de testes são mostrados na matriz de confusão a seguir, mostrando-se razoável em suas respostas e alinhado com as expectativas de solução.
+
+||LAYING verdadeiro|NOT_LAYING verdadeiro|
+|---|---:|---:|
+|**Previsto LAYING**|537 | 0|
+|**Previsto NOT_LAYING**|0 | 2410|
+
+O modelo final obtido foi um modelo de regressão logística com os hiperparâmetros `{'C': 1.0, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'max_iter': 100, 'multi_class': 'ovr', 'n_jobs': 1, 'penalty': 'l2', 'random_state': None, 'solver': 'liblinear', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}`.
+
+Os coeficientes obtidos para o modelo são listados a seguir:
 
 ```
 lr.coef_ = [[ 0.4278084 , -0.48216185, -3.48114521,  0.66226565,  0.62032767,
@@ -318,32 +284,20 @@ lr.coef_ = [[ 0.4278084 , -0.48216185, -3.48114521,  0.66226565,  0.62032767,
 lr.intercept_ = [4.79964236]
 ```
 
-Os resultados para esta rodada de testes são mostrados na matriz de confusão a seguir, mostrando-se razoável em suas respostas e alinhado com as expectativas de solução.
-
-||LAYING verdadeiro|NOT_LAYING verdadeiro|
-|---|---:|---:|
-|**Previsto LAYING**|537 | 0|
-|**Previsto NOT_LAYING**|0 | 2410|
-
 ### Justificativa
 Nesta seção, a solução final do seu modelo e os resultados dela obtidos devem ser comparados aos valores de referência (benchmark) que você estabeleceu anteriormente no projeto, usando algum tipo de análise estatística. Você deverá também justificar se esses resultados e a solução são significativas o suficiente para ter resolvido o problema apresentado no projeto. Questões para se perguntar ao escrever esta seção:
 - _Os resultados finais encontrados são mais fortes do que a referência reportada anteriormente?_
 - _Você analisou e discutiu totalmente a solução final?_
 - _A solução final é significativa o suficiente para ter resolvido o problema?_
 
-A solução final do modelo desenvolvido aparenta apresentar desempenho que supera o do modelo de referência. Este tipo de comparação talvez não possa ser feita diretamente, dado que a solução aqui apresentada baseia-se em uma série de preprocessamentos que tornam o problema razoavelmente mais simples - trata-se de um problema de classificação binária, e não de classificação multiclasse como o modelo de referência citado.
+A solução final do modelo desenvolvido aparenta apresentar desempenho que supera o do modelo de referência (acurácia 1.0 em relação a 0.95). Este tipo de comparação talvez não possa ser feita diretamente, dado que a solução aqui apresentada baseia-se em uma série de preprocessamentos que tornam o problema razoavelmente mais simples - trata-se de um problema de classificação binária, e não de classificação multiclasse como o modelo de referência citado.
 
-Os resultados obtidos pelo modelo são significativos para a resolução do problema dentro de certos limites: os dados utilizados para sua construção foram obtidos num ambiente controlado, e o comportamento pode não ser o mesmo em uma situação real. Dito isso, ainda há bastante espaço para otimização de hiperparâmetros, sendo o resultado deste trabalho um primeiro passo na direção de desenvolver um modelo preditivo de queda.
+Os resultados obtidos pelo modelo são significativos para a resolução do problema dentro de certos limites: os dados utilizados para sua construção foram obtidos num ambiente controlado, e o comportamento do modelo pode não ser o mesmo em uma situação real. Dito isso, ainda há bastante espaço para otimização de hiperparâmetros, sendo o resultado deste trabalho um primeiro passo na direção de desenvolver um modelo preditivo de queda.
 
 
 ## V. Conclusão
-_(aprox. 1-2 páginas)_
 
 ### Foma livre de visualização
-Nesta seção, você deverá fornecer alguma forma de visualização que enfatize uma qualidade importante do projeto. A visualização é de forma livre, mas deve sustentar de forma razoável um resultado ou característica relevante sobre o problema que você quer discutir. Questões para se perguntar ao escrever esta seção:
-- _Você visualizou uma qualidade importante ou relevante acerca do problema, conjunto de dados, dados de entrada, ou resultados?_
-- _A visualização foi completamente analisada e discutida?_
-- _Se um gráfico foi fornecido, os eixos, títulos e dados foram claramente definidos?_
 
 Inicialmente, foi realizada uma tentativa de exibir a fronteira de decisão do modelo treinado, com um gráfico adaptado de [https://stackoverflow.com/questions/28256058/plotting-decision-boundary-of-logistic-regression].
 
@@ -351,7 +305,7 @@ As previsões foram calculadas a partir de probabilidades geradas num grid linea
 
 ![dec_boundary](dec_boundary.png)
 
-O resultado obtido é mostrado no gráfico acima, porém não foi possível a projeção da fronteria de decisão no plano bidimensional.
+O resultado obtido é mostrado no gráfico acima, porém não foi possível projetar a fronteria de decisão no plano bidimensional.
 
 Encontrei um artigo que sugere o uso de retículos Voronoi para estimar a froneira de decisão[http://dare.uva.nl/document/2/164710], mas achei que seria um trabalho além do escopo pretendido aqui.
 
@@ -359,14 +313,9 @@ Finalmente, decidi utilizar uma transformação TSNE (t-distributed Stochastic N
 
 ![tsne_cluster](tsne_cluster.png)
 
-No gráfico, é possível ver os clusters de pontos em azul, representando as ocorrências de `'LAYING'`, e clusters em vermelho mostrando os demais dados. A visualização demonstra como as categorias podem ser prontamente separadas mediante a aplicação de algoritmos. Pela visualização é também possivel observar outros agrupamentos dentre os pontos vermelhos, provavelmente representando as diferentes atividades que compõe a categoria `'NOT_LAYING'` - estes dados poderiam ser separáveis, caso fosse necessário.
+No gráfico, é possível ver os clusters de pontos em azul, representando as ocorrências de `'LAYING'`, e clusters em vermelho mostrando os demais dados. A visualização demonstra como as categorias podem ser prontamente separadas mediante a aplicação de algoritmos. Pela visualização é também possivel observar outros agrupamentos dentre os pontos vermelhos, provavelmente representando as diferentes atividades que compõe a categoria `'NOT_LAYING'` - estes dados provavelmente poderiam ser separáveis, caso fosse este o objetivo.
 
 ### Reflexão
-Nesta seção, você deverá resumir os procedimentos desde o problema até a solução e discutir um ou dois aspectos  do projeto que você achou particularmente interessante ou difícil. É esperado que você reflita sobre o projeto como um todo de forma a mostrar que você possui um entendimento sólido de todo o processo empregado em seu trabalho. Questões para se perguntar ao escrever esta seção:
-- _Você resumiu inteiramente o processo que você utilizou neste projeto?_
-- _Houve algum aspecto interessante do projeto?_
-- _Houve algum aspecto difícil do projeto?_
-- _O modelo e solução final alinham-se com suas expectativas para o problema, e devem ser usadas de forma geral para resolver esses tipos de problemas?_
 
 Para a resolução do problema, a primeira etapa foi explorar os dados - as características dos mesmos posibilitaram ter _insights_ importantes sobre as características das variáveis: se era necessária alguma limpeza nos dados, quais poderiam ser eliminadas imediatamente, como a característica alvo poderia ser tratada e consolidada para simplificar o problema, e se seria necessária uma estratégia de redução de dimensionalidade. 
 
@@ -390,10 +339,12 @@ Nesta seção, você deverá discutir como um aspecto da sua implementação pod
 - _Existem algoritmos ou técnicas que você pesquisou, porém não soube como implementá-las, mas consideraria usar se você soubesse como?_
 - _Se você usou sua solução final como nova referência, você acredita existir uma solução ainda melhor?_
 
-Como já foi colocado, uma ação que poderia ser aprimorada é a construção de um modelo mais generaliável, em detrimento da simplificação do problema. 
+Como já foi colocado, os resultados obtidos pelo modelo são significativos para a resolução do problema dentro de certos limites: os dados utilizados para sua construção foram obtidos num ambiente controlado, e o comportamento do modelo pode não ser o mesmo em uma situação real. Dito isso, ainda há bastante espaço para otimização de hiperparâmetros, sendo o resultado deste trabalho um primeiro passo na direção de desenvolver um modelo preditivo de queda.
 
-Esta solução mais generalizável provavelmente será necessária conforme mais dados possam ser coletados e utilizados, que incluam:
- - dados coletados em situação real, e não por voluntários
+Além disso, um aprimoramento poderia ser a construção de um modelo mais generalizável, em detrimento da simplificação do problema. 
+
+Esta solução mais generalizável provavelmente viria a ser necessária conforme mais dados possam ser coletados e utilizados, que incluam:
+ - dados coletados em situação real, e não por voluntários em ambiente controlado
  - dados relativos a outras atividades
  - transições entre diferentes atividades
  - atividades realizadas por indivíduos com diferentes condições de dificuldades motoras
@@ -402,13 +353,3 @@ Esta solução mais generalizável provavelmente será necessária conforme mais
 Acredito que tal solução poderia utilizar outros modelos de aprendizagem, inclusive combinações de modelos (stacking) ou aprendizagem por reforço.
 
 -----------
-
-**Antes de enviar, pergunte-se. . .**
-
-- _O relatório de projeto que você escreveu segue uma estrutura bem organizada, similar ao modelo do projeto?_
-- Cada seção (particularmente **Análise** e **Metodologia**) foi escrita de maneira clara, concisa e específica? Existe algum termo ou frase ambígua que precise de esclarecimento?
-- O público-alvo do seu projeto será capaz de entender suas análises, métodos e resultados?
-- Você revisou seu relatório de projeto adequadamente, de forma a minimizar a quantidade de erros gramaticais e ortográficos?
-- Todos os recursos usados neste projeto foram corretamente citados e referenciados?
-- O código que implementa sua solução está legível e comentado adequadamente?
-- O código é executado sem erros e produz resultados similares àqueles reportados?
