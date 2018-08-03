@@ -284,10 +284,6 @@ lr.intercept_ = [4.79964236]
 ```
 
 ### Justificativa
-Nesta seção, a solução final do seu modelo e os resultados dela obtidos devem ser comparados aos valores de referência (benchmark) que você estabeleceu anteriormente no projeto, usando algum tipo de análise estatística. Você deverá também justificar se esses resultados e a solução são significativas o suficiente para ter resolvido o problema apresentado no projeto. Questões para se perguntar ao escrever esta seção:
-- _Os resultados finais encontrados são mais fortes do que a referência reportada anteriormente?_
-- _Você analisou e discutiu totalmente a solução final?_
-- _A solução final é significativa o suficiente para ter resolvido o problema?_
 
 A solução final do modelo desenvolvido aparenta apresentar desempenho que supera o do modelo de referência (acurácia 1.0 em relação a 0.95). Este tipo de comparação talvez não possa ser feita diretamente, dado que a solução aqui apresentada baseia-se em uma série de preprocessamentos que tornam o problema razoavelmente mais simples - trata-se de um problema de classificação binária, e não de classificação multiclasse como o modelo de referência citado.
 
@@ -333,10 +329,6 @@ Uma terceira dificuldade minha foi com a criação de gráficos e uso da bibliot
 O modelo e a solução final alinham-se com as minhas expectativas de resolução para o problema. Porém, este tipo de abordagem foi particular para um problema de classificação binária bastante simples, e eu não acredito que pudesse ser utilizado de forma geral para outros problemas de classificação - outras estratégias podem ser necessárias para problemas de maior complexidade.
 
 ### Melhorias
-Nesta seção, você deverá discutir como um aspecto da sua implementação poderia ser melhorado. Por exemplo, considere maneiras de tornar a sua implementação mais geral e o que precisaria ser modificado. Você não precisa fazer a melhoria, mas as possíveis soluções que resultariam de tais mudanças devem ser consideradas e comparadas/contrastadas com a sua solução atual. Questões para se perguntar ao escrever esta seção:
-- _Existem melhorias futuras que podem ser feitas nos algoritmos ou técnicas que você usou neste projeto?_
-- _Existem algoritmos ou técnicas que você pesquisou, porém não soube como implementá-las, mas consideraria usar se você soubesse como?_
-- _Se você usou sua solução final como nova referência, você acredita existir uma solução ainda melhor?_
 
 Como já foi colocado, os resultados obtidos pelo modelo são significativos para a resolução do problema dentro de certos limites: os dados utilizados para sua construção foram obtidos num ambiente controlado, e o comportamento do modelo pode não ser o mesmo em uma situação real. Dito isso, ainda há bastante espaço para otimização de hiperparâmetros, sendo o resultado deste trabalho um primeiro passo na direção de desenvolver um modelo preditivo de queda.
 
