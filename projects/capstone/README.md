@@ -1,10 +1,26 @@
 # Nanodegree Engenheiro de Machine Learning
-## Projeto: Proposta de projeto final e projeto final
+## Projeto: Reconhecimento de Atividades Usando Dados de Smartphone (Projeto final)
 
-**Observação**:
+Este projeto descreve as etapas necessárias para treinar um algoritmo capaz de identificar de forma automática a queda de um indivíduo, a partir de dados obtidos de sensores inerciais presentes em um smartphone.
 
-O projeto final é dividido em duas etapas. A primeira é a proposta, em que você pode receber um feedback valioso sobre a ideia, design e solução pretendida para o seu projeto. Esta etapa deve ser completada antes de iniciar e implementar o projeto final propriamente dito. 
+Os dados utilizados foram baixados de [kaggle.com/uciml/human-activity-recognition-with-smartphones].
 
-Você pode encontrar a [rubrica da proposta de projeto final aqui](https://review.udacity.com/#!/rubrics/410/view), e a [rubrica do projeto final aqui](https://review.udacity.com/#!/rubrics/108/view). Por favor, certifique-se de que você está seguindo as instruções corretamente antes de enviar essas duas etapas que formam seu projeto final.
+Os dados estão em 2 arquivos:
+```
+- test.csv
+- train.csv
+```
+Estes arquivos de dados deverão ser descompactados na mesma pasta do arquivo `UCI-HAR.ipynb`. 
 
-Mande um e-mail para [ml-suporte@udacity.com](mailto:ml-suporte@udacity.com) em caso de dúvidas.
+O código foi escrito em Python 3.4. 
+
+Para sua execução, são necessárias as seguintes bibliotecas:
+- numpy
+- pandas
+- matplotlib
+- seaborn
+- sklearn (scikit-learn)
+
+Em caso de dúvidas, me contate em [renato.gavioli@gmail.com].
+
+Renato Gavioli
