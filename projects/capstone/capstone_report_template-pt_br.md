@@ -1,10 +1,9 @@
 # Nanodegree Engenheiro de Machine Learning
 ## Projeto final - Reconhecimento de Atividades Usando Dados de Smartphone
 Renato Rosafa Gavioli 
-31 de dezembro de 2050
+03 de agosto de 2018
 
 ## I. Definição
-_(aprox. 1-2 páginas)_
 
 ### Visão geral do projeto
 Nesta seção, procure fornecer uma visão de alto nível do projeto em linguagem simples. Questões para se perguntar ao escrever esta seção:
@@ -300,11 +299,11 @@ Nesta seção, o modelo final e quaisquer qualidades que o sustentem devem ser a
 -_O modelo é robusto o suficiente para o problema? Pequenas perturbações (mudanças) nos dados de treinamento ou no espaço de entrada afetam os resultados de forma considerável?_
 - _Os resultados obtidos do modelo são confiáveis?_
 
-O modelo final obtido foi um modelo de regressão logística com os hiperparâmetros XPTO. O modelo foi treinado num conjunto de dados compreendido por 7352 observações, e testado em um subonjunto de dados com 297 observações. 
+O modelo final obtido foi um modelo de regressão logística com os hiperparâmetros `{'C': 1.0, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'max_iter': 100, 'multi_class': 'ovr', 'n_jobs': 1, 'penalty': 'l2', 'random_state': None, 'solver': 'liblinear', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}`. O modelo foi treinado num conjunto de dados compreendido por 7352 observações, e testado em um subonjunto de dados com 297 observações. 
 
 O modelo final de regressão logística foi treinado com os coeficientes conforme listados a seguir:
 
-`
+```
 lr.coef_ = [[ 0.4278084 , -0.48216185, -3.48114521,  0.66226565,  0.62032767,
          0.59808414, -0.7030771 , -0.40759882, -0.23849655,  0.37170711,
          0.91723785,  0.09594431, -0.80197278, -0.48312219, -0.4091375 ,
@@ -317,7 +316,7 @@ lr.coef_ = [[ 0.4278084 , -0.48216185, -3.48114521,  0.66226565,  0.62032767,
          0.39244203,  0.48758815, -1.0780021 , -0.11453316,  0.17013243]]
 
 lr.intercept_ = [4.79964236]
-`
+```
 
 Os resultados para esta rodada de testes são mostrados na matriz de confusão a seguir, mostrando-se razoável em suas respostas e alinhado com as expectativas de solução.
 
@@ -346,6 +345,22 @@ Nesta seção, você deverá fornecer alguma forma de visualização que enfatiz
 - _A visualização foi completamente analisada e discutida?_
 - _Se um gráfico foi fornecido, os eixos, títulos e dados foram claramente definidos?_
 
+Inicialmente, foi realizada uma tentativa de exibir a fronteira de decisão do modelo treinado, com um gráfico adaptado de [https://stackoverflow.com/questions/28256058/plotting-decision-boundary-of-logistic-regression].
+
+As previsões foram calculadas a partir de probabilidades geradas num grid linear para as duas primeiras componentes principais, e para as demais componentes utilizei valores iguais a zero, considerando que as médias para as componentes estão todas em torno de zero (devido à PCA), e assim eu poderia centralizar a projeção bidimensional nas duas primeiras componentes em torno da origem.
+
+![dec_boundary](dec_boundary.png)
+
+O resultado obtido é mostrado no gráfico acima, porém não foi possível a projeção da fronteria de decisão no plano bidimensional.
+
+Encontrei um artigo que sugere o uso de retículos Voronoi para estimar a froneira de decisão[http://dare.uva.nl/document/2/164710], mas achei que seria um trabalho além do escopo pretendido aqui.
+
+Finalmente, decidi utilizar uma transformação TSNE (t-distributed Stochastic Neighbor Embedding), para reduzir as 50 componentes principais para 2, e assim fazer um mapa bidimensional dos dados. 
+
+![tsne_cluster](tsne_cluster.png)
+
+No gráfico, é possível ver os clusters de pontos em azul, representando as ocorrências de `'LAYING'`, e clusters em vermelho mostrando os demais dados. A visualização demonstra como as categorias podem ser prontamente separadas mediante a aplicação de algoritmos. Pela visualização é também possivel observar outros agrupamentos dentre os pontos vermelhos, provavelmente representando as diferentes atividades que compõe a categoria `'NOT_LAYING'` - estes dados poderiam ser separáveis, caso fosse necessário.
+
 ### Reflexão
 Nesta seção, você deverá resumir os procedimentos desde o problema até a solução e discutir um ou dois aspectos  do projeto que você achou particularmente interessante ou difícil. É esperado que você reflita sobre o projeto como um todo de forma a mostrar que você possui um entendimento sólido de todo o processo empregado em seu trabalho. Questões para se perguntar ao escrever esta seção:
 - _Você resumiu inteiramente o processo que você utilizou neste projeto?_
@@ -361,9 +376,11 @@ Finalmente, foram treinados alguns algoritmos de aprendizagem, os quais foram av
 
 O aspecto mais interessante do projeto foi o preprocessamento dos dados, no qual o entendimento sobre as relações entre as variáveis possibilitou que eu agisse de forma deliberada na engenharia de característica e remoção de variáveis. Achei extremamente gratificante me sentir com desenvoltura para usar este tipo de ferramenta (PCA particularmente), e a relevância dos resultados obtidos por elas.
 
-Minhas maiores dificuldades foram na tentativa de entender o significado físico das componentes principais obtidas após a PCA - as componentes podem agregar variáveis com significados físicos e até unidades de medida diferentes...! 
+Tive dificuldade em tentar entender o significado físico das componentes principais obtidas após a PCA - as componentes podem agregar variáveis com significados físicos e até unidades de medida diferentes...! 
 
 Outra dificuldade que senti foi em 'aceitar' os resultados dos modelos com acurácia e revocação iguais a 1.0 - esperava valores menores que 1.0, que permitissem otimização de hiperparâmetros. Acredito que, com um conjunto de dados maior ou mais 'sujo', estes escores tão elevados seriam menos prováveis. No entanto, ao repensar as etapas prévias de engenharia de características e simplificação do problema, acabei por aceitar o resultado.
+
+Uma terceira dificuldade minha foi com a criação de gráficos e uso da biblioteca `matplotlib` - ainda não me entendi muito bem com essa ferramenta, a documentação parece confusa demais... Tenho uma lição de casa pra fazer com isso...
 
 O modelo e a solução final alinham-se com as minhas expectativas de resolução para o problema. Porém, este tipo de abordagem foi particular para um problema de classificação binária bastante simples, e eu não acredito que pudesse ser utilizado de forma geral para outros problemas de classificação - outras estratégias podem ser necessárias para problemas de maior complexidade.
 
