@@ -299,7 +299,7 @@ Nesta seção, o modelo final e quaisquer qualidades que o sustentem devem ser a
 -_O modelo é robusto o suficiente para o problema? Pequenas perturbações (mudanças) nos dados de treinamento ou no espaço de entrada afetam os resultados de forma considerável?_
 - _Os resultados obtidos do modelo são confiáveis?_
 
-O modelo final obtido foi um modelo de regressão logística com os hiperparâmetros `{'C': 1.0, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'max_iter': 100, 'multi_class': 'ovr', 'n_jobs': 1, 'penalty': 'l2', 'random_state': None, 'solver': 'liblinear', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}`. O modelo foi treinado num conjunto de dados compreendido por 7352 observações, e testado em um subonjunto de dados com 297 observações. 
+O modelo final obtido foi um modelo de regressão logística com os hiperparâmetros `{'C': 1.0, 'class_weight': None, 'dual': False, 'fit_intercept': True, 'intercept_scaling': 1, 'max_iter': 100, 'multi_class': 'ovr', 'n_jobs': 1, 'penalty': 'l2', 'random_state': None, 'solver': 'liblinear', 'tol': 0.0001, 'verbose': 0, 'warm_start': False}`. O modelo foi treinado num conjunto de dados compreendido por 7352 observações, e testado em um subonjunto de dados com 1297 observações. 
 
 O modelo final de regressão logística foi treinado com os coeficientes conforme listados a seguir:
 
