@@ -5,7 +5,6 @@ Renato Rosafa Gavioli
 
 03 de agosto de 2018
 
-------------------------
 ## I. Definição
 
 ### Visão geral do projeto
