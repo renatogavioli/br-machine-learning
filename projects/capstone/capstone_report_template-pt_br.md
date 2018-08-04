@@ -225,10 +225,10 @@ Como já descrito anteriormente, foram escolhidas como métricas principais a ac
 Para cálculo das métricas, foram utilizadas as funções disponibilizadas pela biblioteca `sklearn.metrics`. 
 
 Foram avaliados 4 algoritmos simples de treinamento, a saber:
-- Regressão logística (`LogisticRegression`)
-- Naive bayes (`GaussianNB`)
-- Support vector machine (`SVC`)
-- k-nearest neighbors (`KNeighborsClassifier`)
+- Regressão logística (`LogisticRegression`): este algoritmo foi escolhido por conta de sua simplicidade e por ser um modelo apropriado para dados discretos, e para classificar respostas binárias. Uma desvantagem deste modelo é presumir que as variáveis sejam independentes, o que pode não ser verdade para todas as variáveis para este conjunto de dados. O modelo foi escolhido devido à característica binária da variável resposta, e por conta do conjunto de dados ser composto de um número relativamente grande de variáveis. 
+- Naive bayes (`GaussianNB`): este algorimo presume que todas as variáveis são independentes, e assim calcula a probabilidade para um determinado resultado, a partir das probabilidades combinadas condicionadas a cada variável individualmente. O algoritmo é bastnte simples e leve computacionalmente, tendo sido escolhido devido a sua simplicidade.
+- Support vector machine (`SVC`): este modelo é apropriado para classificação e para regressão de dados multivariados, sendo capaz de lidar também com dados contínuos. O modelo cria fronteiras na forma de hiperplanos, capazes de separar os dados em diferentes categorias, podendo ser uma classificação não-binária. Uma limitação é o fato de estas fronteiras - hiperplanos - serem lineares, sendo necessário fazer uso do kernel trick para contornar esta limitação, o que pode aumentar o esforço de ajuste do modelo. A escolha deste algoritmo aqui foi motivada também pela sua relativa simplicidade e eficiência em classificação de dados.
+- k-nearest neighbors (`KNeighborsClassifier`): este algoritmo classifica uma observação com base nos valores obtidos para os K vizinhos mais próximos. Devido a esta característica, o custo computacional para treinamento é relativamente baixo, porém o custo computacional para teste e predição acaba podendo tornar-se elevado. Este modelo também pode ser sensível a outliers, além de sofrer da maldição da dimensionalidade.
 
 Os quatro algoritmos são prontamente aplicáveis para problemas de classificação binária como o que estamos lidando. 
 
