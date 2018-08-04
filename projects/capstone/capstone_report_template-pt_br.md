@@ -312,7 +312,9 @@ Finalmente, decidi utilizar uma transformação TSNE (t-distributed Stochastic N
 
 ![tsne_cluster](tsne_cluster.png)
 
-No gráfico, é possível ver os clusters de pontos em azul, representando as ocorrências de `'LAYING'`, e clusters em vermelho mostrando os demais dados. A visualização demonstra como as categorias podem ser prontamente separadas mediante a aplicação de algoritmos. Pela visualização é também possivel observar outros agrupamentos dentre os pontos vermelhos, provavelmente representando as diferentes atividades que compõe a categoria `'NOT_LAYING'` - estes dados provavelmente poderiam ser separáveis, caso fosse este o objetivo.
+Nos dois gráficos são mostradas em azul as possíveis ocorrências de quedas (categoria `'LAYING'`) para os dados de teste. Na dispersão à esquerda, são mostrados os valores verdadeiros para cada observação, e à esquerda os valores previstos pelo modelo de predião desenvolvido: os gráficos são praticamente idênticos, o que mostra claramente a eficácia do modelo treinado. 
+
+Pela visualização é também possivel observar outros agrupamentos dentre os pontos vermelhos, provavelmente representando as diferentes atividades que compõe a categoria `'NOT_LAYING'` - estes dados provavelmente poderiam ser separáveis por um outro modelo mais generalizável, caso fosse este o objetivo.
 
 ### Reflexão
 
