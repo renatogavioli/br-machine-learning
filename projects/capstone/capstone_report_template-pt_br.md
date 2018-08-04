@@ -84,15 +84,19 @@ Para se ter ideia do perfil geral dos dados, foi plotada uma matriz de gráficos
 
 ![scatterplot](scatterplot.png)
 
-Para esta pequena amostra das variáveis, a maior parte delas parece ser normalmente distribuída. Ademais, é possível suspeitar alguma correlação entre alguns pares de variáveis.
+Para esta pequena amostra das variáveis, pode-se observar como a distribuição de dados é bastante distinta para as situações onde a atividade é `'LAYING'` e `'NOT_LAYING'`. 
 
-Foi criado um mapa de calor dos índices de correlação entre algumas variáveis, que é mostrdo a seguir. Em preto são mostrados os valores próximos de zero, e em azul ou vermelho os valores negativos ou positivos, se aproximando da cor branca quão mais afastados do valor central zero.
+Por exemplo, para a variável que representa a aceleração gravitacional média em X (quarta linha no grid, `'tGravityAcc-mean()-X'`), podemos intuir que para valores acima de zero a atividade é `'NOT_LAYING'`, enquanto valores negativos poderiam indicar uma queda ou acidente (`'LAYING'`).
+
+Essa exploração nos dá indícios fortes de que o conjunto de dados escolhido possui as informações necessárias para a resolução do problema, sendo possível distinguir facilmente quedas de não-quedas.
+
+Foi criado também um mapa de calor dos índices de correlação entre algumas variáveis, que é mostrdo a seguir. Em preto são mostrados os valores próximos de zero, e em azul ou vermelho os valores negativos ou positivos, se aproximando da cor branca quão mais afastados do valor central zero.
 
 ![heatmap_corr1](heatmap_corr1.png)
 
 O gráfico confirma a suspeita de que as variáveis são em geral altamente correlacionadas. De fato, se calcularmos a média dos valores absolutos dos índices de correlação de todos os pares de variáveis, o valor resultante é 0.418. 
 
-Estes dados motivam um trabalho de engenharia de características para reduzir o número de variáveis, dado que a informação rpesente nelas provavelmente pode estar presente em diversas variáveis simultaneamente.
+Esta informação obtida no mapa de calor mostra que um trabalho de engenharia de características pode reduzir bastante a dimensionalidade do problema, o que é fundamental para um melhor desempenho no modelo de predição.
 
 ### Algoritmos e técnicas
 
